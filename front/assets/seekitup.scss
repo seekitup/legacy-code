@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
+
+.v-application {
+  background: url("/Trama - Dark.svg"), #242424 !important;
+  background-position: center !important;
+  background-size: cover !important;
+  font-family: "Archivo", sans-serif !important;
+}
+.v-application--wrap {
+  height: 100vh;
+  max-height: -webkit-fill-available !important;
+}
+.flotante.theme--dark {
+  border: 0.5px solid white;
+  background-color: #c7c9c933 !important;
+  > .v-card__title {
+    background: white;
+    color: black;
+  }
+}
+.allboardsTitle {
+  background: rgba(255, 255, 255, 0.6);
+  border: 0.5px solid white;
+  margin: 0.5rem;
+  padding: 0.25rem 1rem;
+  border-radius: 5rem;
+  color: black;
+}
+.comments > .v-list-group__header {
+  min-height: 1rem !important;
+}
+.v-slide-group__next,
+.v-slide-group__prev {
+  min-width: auto !important;
+}
+.flotante{
+  transition: transform .5s !important;
+  transform: translateY(0px);
+}
+.shareBlock a, .shareBlock a:visited, .shareBlock a:hover, .shareBlock a:active {
+  color: black;
+  text-decoration: none;
+}

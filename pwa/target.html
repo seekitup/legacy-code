@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Seekitup</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- import the webpage's javascript file -->
+    <script src="common.js" defer></script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#242424">
+  </head>  
+  <body style="padding-top: 40%;">
+    <h1>
+      Seekitup
+    </h1>
+    <p id="requireHTTPS" class="hidden">
+      <b>STOP!</b> This page <b>must</b> be served over HTTPS.
+      Please <a>reload this page via HTTPS</a>.
+    </p>
+	
+	<div style="text-align: center;">
+		<p id="commonResult">¡Guardado en Seekitup!</p>
+	</div>
+	
+    <p class="debug">
+      Info a compartir
+    </p>
+        
+    <div class="debug">
+      <b><code>window.location</code>:</b> <code id="href"></code><br>
+      <b>Title:</b> <code id="title"></code><br>
+      <b>Text:</b> <code id="text"></code><br>
+      <b>URL:</b> <code id="url"></code><br>
+	  <b>Tu usuario:<b/> <code id="usr"></code>
+    </div>
+    
+	<div id="result" class="debug"></div>
+    <!--<div style="text-align: center;">
+		<button onclick="activardebug()">Activar debug</button>
+	<div>-->
+    <script>
+      var user = null;
+	  window.addEventListener('DOMContentLoaded', () => {
+		document.getElementById('href').textContent = window.location.href;
+        const parsedUrl = new URL(window.location);
+        document.getElementById('title').textContent = parsedUrl.searchParams.get('title');
+        document.getElementById('text').textContent = parsedUrl.searchParams.get('text');
+        document.getElementById('url').textContent = parsedUrl.searchParams.get('url');
+		if (parsedUrl.searchParams.get('debug') !== undefined && parsedUrl.searchParams.get('debug') == 'true') {
+			Array.from(document.getElementsByClassName('debug')).forEach((element) => {
+				element.classList.remove('debug');
+			});
+		}
+		if (!localStorage.token || localStorage.token == ''){
+			document.getElementById('usr').textContent = 'No está logueado';
+			document.getElementById('commonResult').textContent = 'Ocurrió un error y no se pudo guardar el link. Compruebe su conexión a internet y vuelva a intentarlo.';
+			setTimeout(function(){
+					window.close();
+				}, 5000);
+		} else {
+			fetch('https://seekitup.enterprise-its.com/be/API/validatetoken',
+			{
+			  method: 'POST',
+			  headers: {
+                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                'Content-Type': 'application/json; charset=utf-8',
+				'Authorization': 'Bearer ' + localStorage.token,
+			  }
+			})
+			.then(response => response.json())
+			.then(response => {
+				console.log('Respuesta: ', response);
+				if (response.result == 1) {
+					user = response.data.id
+					document.getElementById('usr').textContent = user;
+					saveURL();
+				} else {
+					document.getElementById('usr').textContent = 'Ocurrió un error intentando recuperar el usuario';
+					document.getElementById('commonResult').textContent = 'Ocurrió un error y no se pudo guardar el link. Compruebe su conexión a internet y vuelva a intentarlo.';
+					setTimeout(function(){
+						window.close();
+					}, 5000);
+				}
+			})
+			.catch(function(error) {
+				document.getElementById('result').textContent = 'Error on fetch: ' + error.message
+				document.getElementById('commonResult').textContent = 'Ocurrió un error y no se pudo guardar el link. Compruebe su conexión a internet y vuelva a intentarlo.';
+				setTimeout(function(){
+					window.close();
+				}, 5000);
+			})
+		}
+      });
+	  function saveURL(){
+		const parsedUrl = new URL(window.location);
+		let url = '';
+		if (parsedUrl.searchParams.get('url') && parsedUrl.searchParams.get('url').trim() != ''){
+			url = parsedUrl.searchParams.get('url').trim();
+		} else {
+			url = parsedUrl.searchParams.get('text').trim();
+		}
+		fetch('https://seekitup.enterprise-its.com/be/API/boards/cards/save',
+			{
+			  method: 'POST',
+			  headers: {
+                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                'Content-Type': 'application/json; charset=utf-8',
+				'Authorization': 'Bearer ' + localStorage.token,
+			  },
+			  body: JSON.stringify({ user: user, url: url})
+			})
+			.then(response => response.json())
+			.then(response => {
+				//document.getElementById('commonResult').innerHTML = '¡Guardado en Seekitup!';
+				document.getElementById('result').textContent = JSON.stringify(response)
+				window.close();
+				/*setTimeout(function(){
+					window.close();
+				}, 2000);*/
+			})
+	  }
+	  function activardebug() {
+		Array.from(document.getElementsByClassName('debug')).forEach((element) => {
+				element.classList.remove('debug');
+			});
+	  }
+    </script>
+  </body>
+</html>

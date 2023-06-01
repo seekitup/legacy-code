@@ -1,0 +1,12 @@
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/mercadolibre/php-sdk.git"
+    }
+  ],
+  "require": {
+    "mercadolibre/php-sdk": "*@dev",
+    "phpoffice/phpspreadsheet": "^1.17"
+  }
+}

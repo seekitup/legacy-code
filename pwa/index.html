@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Seekitup</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- import the webpage's javascript file -->
+    <!-- <script src="share.js" defer></script> -->
+    <script src="common.js" defer></script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#242424">
+  </head>  
+  <body>
+    <h1>
+      Seekitup
+    </h1>
+    <p id="requireHTTPS" class="hidden">
+      <b>STOP!</b> This page <b>must</b> be served over HTTPS.
+      Please <a>reload this page via HTTPS</a>.
+    </p>
+
+    <p style="text-align: center;">
+      Esta es una prueba del pwa que permite compartir links desde las aplicaciones.
+    </p>
+	<p style="text-align: center;">
+	  Presione la notificación en la parte inferior que dice "Agregar Seekitup a la pantalla principal" o en el menú de Chrome (los 3 puntos verticales arriba a la derecha) y luego la opción Instalar aplicación.
+	</p>
+    
+	<p style="text-align: center;" id="noLogin" class="hidden">
+	  <b>Cuidado</b> No está logueado en la aplicación
+	</p>
+	
+    <!-- <p id="notSupported">
+      <b>Sorry!</b> This browser doesn't support the Web Share API,
+      which required for this demo.
+    </p>  -->
+<!--    
+<pre>
+const shareOpts = {
+  title: 'Jabberwocky',
+  text: 'Check out this great poem about a Jabberwocky.',
+  url: 'https://en.wikipedia.org/wiki/Jabberwocky',
+};
+navigator.share(shareOpts);
+</pre>
+    
+    <p>
+      <button type="button" id="butShare" disabled>
+        Share
+      </button>
+    </p>
+    
+    <div id="divResult">
+      
+    </div> -->
+	<script>
+	  window.addEventListener('DOMContentLoaded', () => {
+		if (!localStorage.token || localStorage.token == ''){
+			document.getElementById('noLogin').classList.remove('hidden');
+		}
+	  });
+	</script>
+  </body>
+</html>

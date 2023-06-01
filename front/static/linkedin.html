@@ -1,0 +1,21 @@
+<html>
+  <body style="margin:0px;">
+    <div
+        class="badge-base LI-profile-badge"
+        data-locale="es_ES"
+        data-size="large"
+        data-theme="light"
+        data-type="HORIZONTAL"
+        data-vanity=""
+        style="width: 336px; display: inline-block;"
+    >
+    <a class="LI-simple-link" href=""></a>
+    </div>
+    <script>
+        queryParts = window.location.search.substr(5)
+        document.getElementsByClassName('LI-simple-link')[0].href = queryParts + '?trk=profile-badge'
+        document.getElementsByClassName('LI-profile-badge')[0].dataset.vanity = queryParts
+    </script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+  </body>
+</html>

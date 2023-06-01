@@ -1,0 +1,13 @@
+<html>
+  <body style="margin:0px;">
+    <div
+        class="fb-post"
+        :data-href="link"
+    ></div>
+    <script>
+        queryParts = window.location.search.substr(5)
+        document.getElementsByClassName('fb-post')[0].dataset.href = queryParts
+    </script>
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+  </body>
+</html>

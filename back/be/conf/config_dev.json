@@ -1,0 +1,26 @@
+{
+  "db": {
+    "user": "root",
+    "password": "",
+    "name": "seekitup",
+    "host": "localhost"
+  },
+  "session": {
+    "timeout": 100
+  },
+  "api": {
+    "location": "http://localhost/webs/seekitup/be/API/",
+    "allowedOrigins": [
+      "http://localhost/",
+      "http://localhost:8080",
+      "http://localhost:8080/",
+      "http://localhost:3000",
+      "http://localhost:3000/"
+    ],
+    "key": "core",
+    "loglevel": 2
+  },
+  "front" : {
+    "location": "http://localhost:3000/"
+  }
+}

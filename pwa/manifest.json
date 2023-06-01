@@ -1,0 +1,30 @@
+{
+    "short_name": "Seekitup",
+    "name": "Seekitup",
+    "share_target": {
+        "action": "target.html",
+        "params": {
+            "title": "title",
+            "text": "text",
+            "url": "url"
+        }
+    },
+    "description": "Compartir en Seekitup",
+    "icons": [
+        {
+            "src": "icon_192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icon_512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "https://seekitup.enterprise-its.com/pwa/app.html",
+    "background_color": "#242424",
+    "display": "standalone",
+    "scope": ".",
+    "theme_color": "#242424"
+}
